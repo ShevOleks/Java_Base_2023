@@ -41,7 +41,7 @@ public class CounterStrikeMatchResult2 {
         sumOfFrags += SCANNER.nextInt();
         System.out.print("Please, enter number of frags for fifth player of " + teamName + " team: ");
         sumOfFrags += SCANNER.nextInt();
-        String tmp = SCANNER.nextLine();
+        SCANNER.nextLine();
         System.out.println("Average number of frags for " + teamName + " team = " + ((float) sumOfFrags / numberOfPlayers));
         return sumOfFrags;
     }
