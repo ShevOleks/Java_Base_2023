@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class ShuttleNumbers {
     private static final Scanner SCANNER = new Scanner(System.in);
-
+//Comment for push testing
     public static void main(String[] args) {
         //Getting quantity of shuttles
         System.out.print("Please, enter quantity of shuttles: ");
