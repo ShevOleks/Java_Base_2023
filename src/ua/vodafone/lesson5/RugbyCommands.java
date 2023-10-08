@@ -11,8 +11,9 @@ public class RugbyCommands {
         int minAge = 18;
         int maxAge = 40;
         //Check conditions for calculation
-        if (teamsCount <= 0 || players <= 0 || minAge < 0 || maxAge <= 0) {
+        if (teamsCount <= 0 || players <= 0 || minAge <= 0 || maxAge < minAge) {
             System.out.println("Wrong data!\nCheck your initial variables.");
+            System.out.println("teamsCount = " + teamsCount + "\nplayers = " + players + "\nminAge = " + minAge + "\nmaxAge = " + maxAge);
             return;
         } else {
             System.out.println("\nThe age of players for each team are:");
