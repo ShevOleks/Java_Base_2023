@@ -9,38 +9,38 @@ public class Transposition2 {
     public static void main(String[] args) {
         //Getting dimensions of arrays
         System.out.print("Please, enter dimensions of 2D array (M x N) for transposition: ");
-        int dimM = SCANNER.nextInt();
+        int rows = SCANNER.nextInt();
         //Exclude some symbols between numbers
         while (!SCANNER.hasNextInt()) {
             SCANNER.next();
         }
-        int dimN = SCANNER.nextInt();
+        int columns = SCANNER.nextInt();
         //Check for correct dimensions
-        if (dimM < 1 || dimN < 1) {
+        if (rows < 1 || columns < 1) {
             System.out.println("Error. Incorrect array dimensions");
             return;
         }
 
         //Generate original array and transpose it
-        int[][] origArray = generateArray(dimM, dimN);
-        int[][] transArray = transposeArray(origArray);
+        int[][] originalArray = generateArray(rows, columns);
+        int[][] transposedArray = transposeArray(originalArray);
 
         //Print arrays
-        System.out.printf("\nOriginal array (%d x %d) is:\n", dimM, dimN);
-        printArray(origArray);
-        System.out.printf("\nTransposed array (%d x %d) is:\n", dimN, dimM);
-        printArray(transArray);
+        System.out.printf("\nOriginal array (%d x %d) is:\n", rows, columns);
+        printArray(originalArray);
+        System.out.printf("\nTransposed array (%d x %d) is:\n", columns, rows);
+        printArray(transposedArray);
 
     }
 
-    private static int[][] generateArray(int dimM, int dimN) {
-        int[][] arr = new int[dimM][dimN];
-        for (int i = 0; i < dimM; i++) {
-            for (int j = 0; j < dimN; j++) {
-                arr[i][j] = ThreadLocalRandom.current().nextInt(100);
+    private static int[][] generateArray(int rows, int columns) {
+        int[][] array = new int[rows][columns];
+        for (int i = 0; i < array.length; i++) {
+            for (int j = 0; j < array[i].length; j++) {
+                array[i][j] = ThreadLocalRandom.current().nextInt(100);
             }
         }
-        return arr;
+        return array;
     }
 
     private static int[][] transposeArray(int[][] origArray) {

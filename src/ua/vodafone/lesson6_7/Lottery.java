@@ -5,12 +5,17 @@ import java.util.concurrent.ThreadLocalRandom;
 public class Lottery {
     public static void main(String[] args) {
         // Making arrays
-        int lengthArr = 7;
-        int numRange = 9;
-        int[] org = genArray(lengthArr, numRange);
-        int[] user = genArray(lengthArr, numRange);
+        int ticketLength = 7;
+        int numbersRange = 9;
+        int[] org = generateTicket(ticketLength, numbersRange);
+        printArray(org);
+        System.out.println(" - Initial array of organizer");
+        int[] user = generateTicket(ticketLength, numbersRange);
+        printArray(user);
+        System.out.println(" - Initial array of user");
 
         //Sort and print arrays
+        System.out.println();
         sortArray(org);
         printArray(org);
         System.out.println(" - Sorted array of organizer");
@@ -19,13 +24,14 @@ public class Lottery {
         System.out.println(" - Sorted array of user");
 
         //Check and print results
+        System.out.println();
         int score = checkWin(org, user);
         if (score > 0) {
-            System.out.printf("Today you guessed %d numbers of %d\n", score, lengthArr);
+            System.out.printf("Today you guessed %d numbers of %d\n", score, ticketLength);
         } else {
             System.out.printf("Sorry, but it's not your day today...\nYou guessed %d numbers...", score);
         }
-        if (score == lengthArr) {
+        if (score == ticketLength) {
             System.out.print("That's cool!!!\nYou lucky today! ");
         }
     }
@@ -62,11 +68,11 @@ public class Lottery {
         arr[i] = tmp;
     }
 
-    private static int[] genArray(int length, int numRange) {
-        int[] arr = new int[length];
-        for (int i = 0; i < length; i++) {
-            arr[i] = ThreadLocalRandom.current().nextInt(numRange + 1);
+    private static int[] generateTicket(int length, int numbersRange) {
+        int[] array = new int[length];
+        for (int i = 0; i < array.length; i++) {
+            array[i] = ThreadLocalRandom.current().nextInt(numbersRange + 1);
         }
-        return arr;
+        return array;
     }
 }
