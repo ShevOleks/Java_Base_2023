@@ -7,25 +7,18 @@ public class Transposition2 {
     private static final Scanner SCANNER = new Scanner(System.in);
 
     public static void main(String[] args) {
-        //Getting dimensions of arrays
         System.out.print("Please, enter dimensions of 2D array (M x N) for transposition: ");
         int rows = SCANNER.nextInt();
-        //Exclude some symbols between numbers
         while (!SCANNER.hasNextInt()) {
             SCANNER.next();
         }
         int columns = SCANNER.nextInt();
-        //Check for correct dimensions
         if (rows < 1 || columns < 1) {
             System.out.println("Error. Incorrect array dimensions");
             return;
         }
-
-        //Generate original array and transpose it
         int[][] originalArray = generateArray(rows, columns);
         int[][] transposedArray = transposeArray(originalArray);
-
-        //Print arrays
         System.out.printf("\nOriginal array (%d x %d) is:\n", rows, columns);
         printArray(originalArray);
         System.out.printf("\nTransposed array (%d x %d) is:\n", columns, rows);
@@ -43,18 +36,18 @@ public class Transposition2 {
         return array;
     }
 
-    private static int[][] transposeArray(int[][] origArray) {
-        int[][] arr = new int[origArray[0].length][origArray.length];
-        for (int i = 0; i < origArray.length; i++) {
-            for (int j = 0; j < origArray[i].length; j++) {
-                arr[j][i] = origArray[i][j];
+    private static int[][] transposeArray(int[][] originalArray) {
+        int[][] transposedArray = new int[originalArray[0].length][originalArray.length];
+        for (int i = 0; i < originalArray.length; i++) {
+            for (int j = 0; j < originalArray[i].length; j++) {
+                transposedArray[j][i] = originalArray[i][j];
             }
         }
-        return arr;
+        return transposedArray;
     }
 
-    private static void printArray(int[][] arr) {
-        for (int[] row : arr) {
+    private static void printArray(int[][] array) {
+        for (int[] row : array) {
             for (int cell : row) {
                 System.out.printf(" %2d", cell);
             }

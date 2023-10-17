@@ -4,28 +4,25 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class Lottery {
     public static void main(String[] args) {
-        // Making arrays
         int ticketLength = 7;
         int numbersRange = 9;
-        int[] org = generateTicket(ticketLength, numbersRange);
-        printArray(org);
+        int[] organizerTicket = generateTicket(ticketLength, numbersRange);
+        printArray(organizerTicket);
         System.out.println(" - Initial array of organizer");
-        int[] user = generateTicket(ticketLength, numbersRange);
-        printArray(user);
+        int[] userTicket = generateTicket(ticketLength, numbersRange);
+        printArray(userTicket);
         System.out.println(" - Initial array of user");
 
-        //Sort and print arrays
         System.out.println();
-        sortArray(org);
-        printArray(org);
+        sortArray(organizerTicket);
+        printArray(organizerTicket);
         System.out.println(" - Sorted array of organizer");
-        sortArray(user);
-        printArray(user);
+        sortArray(userTicket);
+        printArray(userTicket);
         System.out.println(" - Sorted array of user");
 
-        //Check and print results
         System.out.println();
-        int score = checkWin(org, user);
+        int score = checkWin(organizerTicket, userTicket);
         if (score > 0) {
             System.out.printf("Today you guessed %d numbers of %d\n", score, ticketLength);
         } else {
@@ -36,36 +33,36 @@ public class Lottery {
         }
     }
 
-    private static int checkWin(int[] org, int[] user) {
+    private static int checkWin(int[] organizerTicket, int[] userTicket) {
         int score = 0;
-        for (int i = 0; i < org.length; i++) {
-            if (org[i] == user[i]) {
+        for (int i = 0; i < organizerTicket.length; i++) {
+            if (organizerTicket[i] == userTicket[i]) {
                 score++;
             }
         }
         return score;
     }
 
-    private static void printArray(int[] arr) {
-        for (int cell : arr) {
+    private static void printArray(int[] array) {
+        for (int cell : array) {
             System.out.print(cell + "; ");
         }
     }
 
-    private static void sortArray(int[] arr) {
-        for (int i = 0; i < arr.length - 1; i++) {
-            for (int j = 0; j < arr.length - 1 - i; j++) {
-                if (arr[j] > arr[j + 1]) {
-                    swap(arr, j, j + 1);
+    private static void sortArray(int[] array) {
+        for (int i = 0; i < array.length - 1; i++) {
+            for (int j = 0; j < array.length - 1 - i; j++) {
+                if (array[j] > array[j + 1]) {
+                    swap(array, j, j + 1);
                 }
             }
         }
     }
 
-    private static void swap(int[] arr, int j, int i) {
-        int tmp = arr[j];
-        arr[j] = arr[i];
-        arr[i] = tmp;
+    private static void swap(int[] array, int j, int i) {
+        int temp = array[j];
+        array[j] = array[i];
+        array[i] = temp;
     }
 
     private static int[] generateTicket(int length, int numbersRange) {
