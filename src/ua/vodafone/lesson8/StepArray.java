@@ -7,29 +7,24 @@ public class StepArray {
     private static final Scanner SCANNER = new Scanner(System.in);
 
     public static void main(String[] args) {
-        //Enter initial variables
         System.out.print("Please, enter numbers of rows for array: ");
         int rows = SCANNER.nextInt();
         SCANNER.nextLine();
         System.out.print("Please, enter max size of rows for array: ");
         int maxSize = SCANNER.nextInt();
         SCANNER.nextLine();
+        int maxValue = 100;
+        int minValue = 0;
 
-        //Check initial variables
         if (rows <= 0 || maxSize <= 0) {
             System.out.println("\nInitial error. Check number of rows and max size of rows: ");
             System.out.printf("Number of rows = %d\nMax size of rows = %d", rows, maxSize);
             return;
         }
-
-        //Generate array
-        int[][] array = generateSteppedArray(rows, maxSize);
-
-        //Print initial array
+        int[][] array = generateSteppedArray(rows, maxSize, minValue, maxValue);
         System.out.println("\nInitial array is:");
         print2DArray(array);
 
-        //Sort array
         for (int i = 0; i < array.length; i++) {
             if ((i + 1) % 2 == 0) {
                 sortAscend(array[i]);
@@ -40,28 +35,41 @@ public class StepArray {
         System.out.println("\nSorted array is:");
         print2DArray(array);
 
-        //Sum of elements
-        int sum = sumOfArray(array);
-        System.out.printf("\nTotal sum of array's elements is: %d", sum);
+        int sum = sumOfArray(array, minValue);
+        System.out.print("\nTotal sum of array's elements is: ");
+        printVerifiedResult(sum, minValue);
 
-        //Min elements for each row
-        int[] minElements = selectMinimumForRows(array);
-        System.out.print("\nMinimal elements of each existing row are: ");
-        printLineArray(minElements);
+        int[] minElements = selectMinimumForRows(array, minValue);
+        System.out.print("\nMinimal elements of each row are: ");
+        printMinElements(minElements, minValue);
 
-        //Absolute minimum of array
-        int absoluteMinimum = minimumOfArray(minElements);
-        System.out.print("\nAbsolute minimum of array are: " + absoluteMinimum);
+        int absoluteMinimum = minimumOfArray(minElements, minValue);
+        System.out.print("\nAbsolute minimum of array are: ");
+        printVerifiedResult(absoluteMinimum, minValue);
 
-        //Divide all array's elements by absolute minimum of array
         if (absoluteMinimum == 0) {
-            System.out.println("It's not possible to divide by zero, because of absolute minimum");
+            System.out.println("\nIt's not possible to divide by zero, because of...");
             return;
         }
         divideArrayElements(array, absoluteMinimum);
         System.out.println("\n\nDivided array is:");
         print2DArray(array);
 
+    }
+
+    private static void printMinElements(int[] minElements, int minValue) {
+        for (int i = 0; i < minElements.length; i++) {
+            System.out.printf("  %d). ", i + 1);
+            printVerifiedResult(minElements[i], minValue);
+        }
+    }
+
+    private static void printVerifiedResult(int value, int minValue) {
+        if (value == minValue - 1) {
+            System.out.print("null");
+        } else {
+            System.out.print(value);
+        }
     }
 
     private static void divideArrayElements(int[][] array, int absoluteMinimum) {
@@ -72,39 +80,39 @@ public class StepArray {
         }
     }
 
-    private static int minimumOfArray(int[] minElements) {
-        sortAscend(minElements);
-        return minElements[0];
+    private static int minimumOfArray(int[] minElements, int minValue) {
+        int minimum = minElements[0];
+        for (int i = 0; i < minElements.length - 1; i++) {
+            if (minElements[i + 1] != minValue - 1) {
+                if (minimum > minElements[i + 1] || minimum == minValue - 1) {
+                    minimum = minElements[i + 1];
+                }
+            }
+        }
+        return minimum;
     }
 
-    private static int[] selectMinimumForRows(int[][] array) {
-        int[] minimumNumbersForRows = new int[array.length - numbersEmptyRows(array)];
-        int index = 0;
-        for (int[] row : array) {
-            if (row.length != 0) {
-                minimumNumbersForRows[index] = Math.min(row[0], row[row.length - 1]);
-                index++;
+    private static int[] selectMinimumForRows(int[][] array, int minValue) {
+        int[] minimumNumbersForRows = new int[array.length];
+        for (int i = 0; i < array.length; i++) {
+            if (array[i].length != 0) {
+                minimumNumbersForRows[i] = Math.min(array[i][0], array[i][array[i].length - 1]);
+            } else {
+                minimumNumbersForRows[i] = minValue - 1;
             }
         }
         return minimumNumbersForRows;
     }
 
-    private static int numbersEmptyRows(int[][] array) {
-        int rows = 0;
-        for (int[] row : array) {
-            if (row.length == 0) {
-                rows++;
-            }
-        }
-        return rows;
-    }
-
-    private static int sumOfArray(int[][] array) {
-        int sum = 0;
+    private static int sumOfArray(int[][] array, int minValue) {
+        int sum = minValue - 1;
         for (int[] row : array) {
             for (int cell : row) {
                 sum += cell;
             }
+        }
+        if (sum != minValue - 1) {
+            sum = sum - minValue - 1;
         }
         return sum;
     }
@@ -135,12 +143,12 @@ public class StepArray {
         }
     }
 
-    private static int[][] generateSteppedArray(int rows, int maxSize) {
+    private static int[][] generateSteppedArray(int rows, int maxSize, int minValue, int maxValue) {
         int[][] array = new int[rows][];
         for (int i = 0; i < array.length; i++) {
             array[i] = new int[ThreadLocalRandom.current().nextInt(maxSize)];
             for (int j = 0; j < array[i].length; j++) {
-                array[i][j] = ThreadLocalRandom.current().nextInt(100);
+                array[i][j] = ThreadLocalRandom.current().nextInt(minValue, maxValue);
             }
         }
         return array;
@@ -156,6 +164,10 @@ public class StepArray {
     }
 
     private static void printLineArray(int[] row) {
+        if (row.length == 0) {
+            System.out.print("null");
+            return;
+        }
         for (int cell : row) {
             System.out.printf(" %2d", cell);
         }
