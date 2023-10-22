@@ -49,10 +49,6 @@ public class StepArray {
         System.out.print("\nAbsolute minimum of array are: ");
         printVerifiedResult(absoluteMinimum);
 
-//        if (absoluteMinimum == 0) {
-//            System.out.println("\nIt's not possible to divide by zero, because of...");
-//            return;
-//        }
         divideArrayElements(array, absoluteMinimum);
         if (absoluteMinimum == 0 || absoluteMinimum == isNull) {
             System.out.println("The result of dividing by zero or null is undefined.");
