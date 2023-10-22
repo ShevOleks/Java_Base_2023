@@ -17,10 +17,10 @@ public class StepArray {
         int maxSize = SCANNER.nextInt();
         SCANNER.nextLine();
 
-        if (rows <= 0 || maxSize <= 0 || minValue <= Integer.MIN_VALUE || maxValue > Integer.MAX_VALUE) {
+        if (rows <= 0 || maxSize <= 0 || minValue <= Integer.MIN_VALUE) {
             System.out.println("\nInitial error. Check number of rows and max size of rows: ");
             System.out.printf("Number of rows = %d\nMax size of rows = %d", rows, maxSize);
-            System.out.printf("Minimal array value = %d vs (%d)\nMaximum array value = %d vs (%d)", minValue, Integer.MIN_VALUE, maxValue, Integer.MAX_VALUE);
+            System.out.printf("Minimal array value = %d vs (%d)", minValue, Integer.MIN_VALUE + 1);
             return;
         }
         int[][] array = generateSteppedArray(rows, maxSize);
@@ -40,7 +40,6 @@ public class StepArray {
         int sum = sumOfArray(array);
         System.out.print("\nTotal sum of array's elements is: ");
         printVerifiedResult(sum);
-        System.out.println("\nTest array sum: " + sumOfArray(new int[][]{{1, 2, 3}}));
 
         int[] minElements = selectMinimumForRows(array);
         System.out.print("\nMinimal elements of each row are: ");
@@ -50,13 +49,17 @@ public class StepArray {
         System.out.print("\nAbsolute minimum of array are: ");
         printVerifiedResult(absoluteMinimum);
 
-        if (absoluteMinimum == 0) {
-            System.out.println("\nIt's not possible to divide by zero, because of...");
-            return;
-        }
+//        if (absoluteMinimum == 0) {
+//            System.out.println("\nIt's not possible to divide by zero, because of...");
+//            return;
+//        }
         divideArrayElements(array, absoluteMinimum);
-        System.out.println("\n\nDivided array is:");
-        print2DArray(array);
+        if (absoluteMinimum == 0 || absoluteMinimum == isNull) {
+            System.out.println("The result of dividing by zero or null is undefined.");
+        } else {
+            System.out.println("\n\nDivided array is:");
+            print2DArray(array);
+        }
 
     }
 
@@ -76,6 +79,10 @@ public class StepArray {
     }
 
     private static void divideArrayElements(int[][] array, int absoluteMinimum) {
+        if (absoluteMinimum == 0 || absoluteMinimum == isNull) {
+            System.out.println("\nIt's not possible to divide by zero or null, because of...");
+            return;
+        }
         for (int i = 0; i < array.length; i++) {
             for (int j = 0; j < array[i].length; j++) {
                 array[i][j] /= absoluteMinimum;
