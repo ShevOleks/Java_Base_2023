@@ -31,17 +31,6 @@ public class TrackerAccounts {
         age = new GregorianCalendar().get(Calendar.YEAR) - yearOfBirth;
     }
 
-    public void printAccountInfo() {
-        System.out.printf("\nUser name is: %s %s", name, surname);
-        System.out.printf("\nBirth date: %02d-%02d-%d", dayOfBirth, monthOfBirth, yearOfBirth);
-        System.out.printf("\nAge is %d years old.", age);
-        System.out.printf("\nEmail is: %s", email);
-        System.out.printf("\nPhone number is: %s", phoneNumber);
-        System.out.printf("\nWeight is: %.1f kg", weight);
-        System.out.printf("\nBlood pressure is: %s", pressure);
-        System.out.printf("\nNumber of steps is: %d", steps);
-    }
-
     public String getName() {
         return name;
     }
@@ -88,6 +77,17 @@ public class TrackerAccounts {
 
     public void setSurname(String surname) {
         this.surname = surname;
+    }
+
+    public void printAccountInfo() {
+        System.out.printf("\nUser name is: %s %s", name, surname);
+        System.out.printf("\nBirth date: %02d-%02d-%d", dayOfBirth, monthOfBirth, yearOfBirth);
+        System.out.printf("\nAge is %d years old.", age);
+        System.out.printf("\nEmail is: %s", email);
+        System.out.printf("\nPhone number is: %s", phoneNumber);
+        System.out.printf("\nWeight is: %.1f kg", weight);
+        System.out.printf("\nBlood pressure is: %s", pressure);
+        System.out.printf("\nNumber of steps is: %d", steps);
     }
 
     public void setWeight(float weight) {
