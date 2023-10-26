@@ -5,9 +5,9 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class StepArray {
     private static final Scanner SCANNER = new Scanner(System.in);
-    static final int minValue = 0;
-    static final int maxValue = 100;
-    static final int isNull = minValue - 1;
+    static final int MIN_VALUE = 0;
+    static final int MAX_VALUE = 100;
+    static final int IS_NULL = MIN_VALUE - 1;
 
     public static void main(String[] args) {
         System.out.print("Please, enter numbers of rows for array: ");
@@ -17,10 +17,10 @@ public class StepArray {
         int maxSize = SCANNER.nextInt();
         SCANNER.nextLine();
 
-        if (rows <= 0 || maxSize <= 0 || minValue <= Integer.MIN_VALUE) {
+        if (rows <= 0 || maxSize <= 0 || MIN_VALUE == Integer.MIN_VALUE) {
             System.out.println("\nInitial error. Check number of rows and max size of rows: ");
             System.out.printf("Number of rows = %d\nMax size of rows = %d", rows, maxSize);
-            System.out.printf("Minimal array value = %d vs (%d)", minValue, Integer.MIN_VALUE + 1);
+            System.out.printf("Minimal array value = %d vs (%d)", MIN_VALUE, Integer.MIN_VALUE + 1);
             return;
         }
         int[][] array = generateSteppedArray(rows, maxSize);
@@ -50,7 +50,7 @@ public class StepArray {
         printVerifiedResult(absoluteMinimum);
 
         divideArrayElements(array, absoluteMinimum);
-        if (absoluteMinimum == 0 || absoluteMinimum == isNull) {
+        if (absoluteMinimum == 0 || absoluteMinimum == IS_NULL) {
             System.out.println("The result of dividing by zero or null is undefined.");
         } else {
             System.out.println("\n\nDivided array is:");
@@ -67,7 +67,7 @@ public class StepArray {
     }
 
     private static void printVerifiedResult(int value) {
-        if (value == isNull) {
+        if (value == IS_NULL) {
             System.out.print("null");
         } else {
             System.out.print(value);
@@ -75,7 +75,7 @@ public class StepArray {
     }
 
     private static void divideArrayElements(int[][] array, int absoluteMinimum) {
-        if (absoluteMinimum == 0 || absoluteMinimum == isNull) {
+        if (absoluteMinimum == 0 || absoluteMinimum == IS_NULL) {
             System.out.println("\nIt's not possible to divide by zero or null, because of...");
             return;
         }
@@ -89,8 +89,8 @@ public class StepArray {
     private static int minimumOfArray(int[] minElements) {
         int minimum = minElements[0];
         for (int i = 0; i < minElements.length - 1; i++) {
-            if (minElements[i + 1] != isNull) {
-                if (minimum > minElements[i + 1] || minimum == isNull) {
+            if (minElements[i + 1] != IS_NULL) {
+                if (minimum > minElements[i + 1] || minimum == IS_NULL) {
                     minimum = minElements[i + 1];
                 }
             }
@@ -104,21 +104,21 @@ public class StepArray {
             if (array[i].length != 0) {
                 minimumNumbersForRows[i] = Math.min(array[i][0], array[i][array[i].length - 1]);
             } else {
-                minimumNumbersForRows[i] = isNull;
+                minimumNumbersForRows[i] = IS_NULL;
             }
         }
         return minimumNumbersForRows;
     }
 
     private static int sumOfArray(int[][] array) {
-        int sum = isNull;
+        int sum = IS_NULL;
         for (int[] row : array) {
             for (int cell : row) {
                 sum += cell;
             }
         }
-        if (sum != isNull) {
-            sum = sum - isNull;
+        if (sum != IS_NULL) {
+            sum = sum - IS_NULL;
         }
         return sum;
     }
@@ -154,7 +154,7 @@ public class StepArray {
         for (int i = 0; i < array.length; i++) {
             array[i] = new int[ThreadLocalRandom.current().nextInt(maxSize)];
             for (int j = 0; j < array[i].length; j++) {
-                array[i][j] = ThreadLocalRandom.current().nextInt(minValue, maxValue);
+                array[i][j] = ThreadLocalRandom.current().nextInt(MIN_VALUE, MAX_VALUE);
             }
         }
         return array;
