@@ -26,9 +26,9 @@ public class Burgers {
         printList();
     }
 
-    public Burgers(String bun, String meat, int portion, String cheese, String salad, String mayonnaise) {
+    public Burgers(String bun, String meat, String cheese, String salad, String mayonnaise, int meatPortion) {
         this.bun = bun;
-        this.meat = portion + " x " + meat;
+        this.meat = meatPortion + " x " + meat;
         this.cheese = cheese;
         this.salad = salad;
         this.mayonnaise = mayonnaise;
@@ -37,16 +37,11 @@ public class Burgers {
     }
 
     private void printList() {
-        String item = bun;
-        printItem(item);
-        item = meat;
-        printItem(item);
-        item = cheese;
-        printItem(item);
-        item = salad;
-        printItem(item);
-        item = mayonnaise;
-        printItem(item);
+        printItem(bun);
+        printItem(meat);
+        printItem(cheese);
+        printItem(salad);
+        printItem(mayonnaise);
     }
 
     private static void printItem(String item) {
