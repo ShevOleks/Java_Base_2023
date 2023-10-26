@@ -1,12 +1,17 @@
 package ua.vodafone.lesson10;
 
-public class Point {
+public class Point implements Cloneable {
     private int abscissa;
     private int ordinate;
 
     public Point(int abscissa, int ordinate) {
         this.abscissa = abscissa;
         this.ordinate = ordinate;
+    }
+
+    public Point(Point somePoint) {
+        abscissa = somePoint.abscissa;
+        ordinate = somePoint.ordinate;
     }
 
     public int getAbscissa() {
@@ -25,13 +30,28 @@ public class Point {
         this.ordinate = ordinate;
     }
 
-    public static double distanceBetweenPoints (Point first, Point second) {
+    public static double distanceBetweenPoints(Point first, Point second) {
         int abscissaProjection = first.abscissa - second.abscissa;
         int ordinateProjection = first.ordinate - second.ordinate;
-        return Math.sqrt(Math.pow(abscissaProjection,2) + Math.pow(ordinateProjection,2));
+        return Math.sqrt(Math.pow(abscissaProjection, 2) + Math.pow(ordinateProjection, 2));
     }
-    public double distanceToPoint (Point point) {
+
+    public double distanceToPoint(Point point) {
         return distanceBetweenPoints(this, point);
+    }
+
+    public String getCoordinates() {
+        return "(" + abscissa + ";" + ordinate + ")";
+    }
+
+    public void setCoordinates(int x, int y) {
+        abscissa = x;
+        ordinate = y;
+    }
+
+    @Override
+    protected Point clone() throws CloneNotSupportedException {
+        return (Point) super.clone();
     }
 
     @Override
@@ -44,6 +64,11 @@ public class Point {
         }
         Point somePoint = (Point) obj;
         return (this.ordinate == somePoint.ordinate && this.abscissa == somePoint.abscissa);
+    }
+
+    @Override
+    public int hashCode() {
+        return (31 * abscissa + ordinate) * 31;
     }
 
     @Override
