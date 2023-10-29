@@ -31,6 +31,9 @@ public class Point implements Cloneable {
     }
 
     public static double distanceBetweenPoints(Point first, Point second) {
+        if (first == null || second == null) {
+            return -1;
+        }
         int abscissaProjection = first.abscissa - second.abscissa;
         int ordinateProjection = first.ordinate - second.ordinate;
         return Math.sqrt(Math.pow(abscissaProjection, 2) + Math.pow(ordinateProjection, 2));
@@ -63,7 +66,7 @@ public class Point implements Cloneable {
             return false;
         }
         Point somePoint = (Point) obj;
-        return (this.ordinate == somePoint.ordinate && this.abscissa == somePoint.abscissa);
+        return this.ordinate == somePoint.ordinate && this.abscissa == somePoint.abscissa;
     }
 
     @Override
