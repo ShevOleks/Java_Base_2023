@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>ua.vodafone</groupId>
-    <artifactId>JavaBase_2023</artifactId>
+    <artifactId>javabase-2023</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 

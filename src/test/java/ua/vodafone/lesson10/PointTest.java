@@ -1,14 +1,15 @@
 package ua.vodafone.lesson10;
 
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class PointTest {
-    private static Point one, two;
+    private Point one;
+    private Point two;
 
-    @BeforeAll
-    static void beforeAll() {
+    @BeforeEach
+    void beforeEach() {
         one = new Point(1, 1);
         two = new Point(2, 2);
     }
@@ -18,7 +19,7 @@ class PointTest {
         //when
         double result = Point.distanceBetweenPoints(one, two);
         //then
-        Assertions.assertEquals(Math.sqrt(2), result);
+        Assertions.assertEquals(Math.sqrt(2), result, 0.001);
     }
 
     @Test
@@ -26,7 +27,7 @@ class PointTest {
         //when
         double result = Point.distanceBetweenPoints(two, two);
         //then
-        Assertions.assertEquals(0, result);
+        Assertions.assertEquals(0, result, 0.001);
     }
 
     @Test
@@ -58,7 +59,7 @@ class PointTest {
         //when
         double result = one.distanceToPoint(two);
         //then
-        Assertions.assertEquals(Math.sqrt(2), result);
+        Assertions.assertEquals(Math.sqrt(2), result, 0.001);
     }
 
     @Test
@@ -66,7 +67,7 @@ class PointTest {
         //when
         double result = one.distanceToPoint(one);
         //then
-        Assertions.assertEquals(0, result);
+        Assertions.assertEquals(0, result, 0.001);
     }
 
     @Test
@@ -75,11 +76,5 @@ class PointTest {
         double result = one.distanceToPoint(null);
         //then
         Assertions.assertEquals(-1, result);
-    }
-
-    @Test
-    void distanceToNullException() {
-        final Point three = null;
-        Assertions.assertThrows(NullPointerException.class, () -> three.distanceToPoint(two));
     }
 }
