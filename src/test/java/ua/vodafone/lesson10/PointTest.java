@@ -1,12 +1,17 @@
 package ua.vodafone.lesson10;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class PointTest {
-    //given
-    private final Point one = new Point(1, 1);
-    private final Point two = new Point(2, 2);
+    private static Point one, two;
+
+    @BeforeAll
+    static void beforeAll() {
+        one = new Point(1, 1);
+        two = new Point(2, 2);
+    }
 
     @Test
     void distanceBetweenNormalPoints() {
@@ -70,5 +75,11 @@ class PointTest {
         double result = one.distanceToPoint(null);
         //then
         Assertions.assertEquals(-1, result);
+    }
+
+    @Test
+    void distanceToNullException() {
+        final Point three = null;
+        Assertions.assertThrows(NullPointerException.class, () -> three.distanceToPoint(two));
     }
 }
