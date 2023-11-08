@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class PointTest {
+    private static final double DELTA = 0.001;
     private Point one;
     private Point two;
 
@@ -19,7 +20,7 @@ class PointTest {
         //when
         double result = Point.distanceBetweenPoints(one, two);
         //then
-        Assertions.assertEquals(Math.sqrt(2), result, 0.001);
+        Assertions.assertEquals(Math.sqrt(2), result, DELTA);
     }
 
     @Test
@@ -27,7 +28,7 @@ class PointTest {
         //when
         double result = Point.distanceBetweenPoints(two, two);
         //then
-        Assertions.assertEquals(0, result, 0.001);
+        Assertions.assertEquals(0, result, DELTA);
     }
 
     @Test
@@ -35,7 +36,7 @@ class PointTest {
         //when
         double result = Point.distanceBetweenPoints(null, two);
         //then
-        Assertions.assertEquals(-1, result);
+        Assertions.assertEquals(-1, result, DELTA);
     }
 
     @Test
@@ -43,7 +44,7 @@ class PointTest {
         //when
         double result = Point.distanceBetweenPoints(one, null);
         //then
-        Assertions.assertEquals(-1, result);
+        Assertions.assertEquals(-1, result, DELTA);
     }
 
     @Test
@@ -51,7 +52,7 @@ class PointTest {
         //when
         double result = Point.distanceBetweenPoints(null, null);
         //then
-        Assertions.assertEquals(-1, result);
+        Assertions.assertEquals(-1, result, DELTA);
     }
 
     @Test
@@ -59,7 +60,7 @@ class PointTest {
         //when
         double result = one.distanceToPoint(two);
         //then
-        Assertions.assertEquals(Math.sqrt(2), result, 0.001);
+        Assertions.assertEquals(Math.sqrt(2), result, DELTA);
     }
 
     @Test
@@ -67,7 +68,7 @@ class PointTest {
         //when
         double result = one.distanceToPoint(one);
         //then
-        Assertions.assertEquals(0, result, 0.001);
+        Assertions.assertEquals(0, result, DELTA);
     }
 
     @Test
@@ -75,6 +76,6 @@ class PointTest {
         //when
         double result = one.distanceToPoint(null);
         //then
-        Assertions.assertEquals(-1, result);
+        Assertions.assertEquals(-1, result, DELTA);
     }
 }
