@@ -7,9 +7,8 @@ public class MusicStylesDemo {
                 new RockMusic("HIM"),
                 new ClassicMusic("Vanessa Mae")
         };
-        for (MusicStyles team: teams) {
+        for (MusicStyles team : teams) {
             team.playMusic();
         }
-
     }
 }
